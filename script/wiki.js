@@ -30,7 +30,7 @@ console.log(url)
 
 return
 
-//si CHAT GPT enlever ligne 1 à 32 et remplir apikey
+//si CHAT GPT enlever ligne 5 à 32 et remplir apikey
 var temp=JarvisIA.reco
 const { Configuration, OpenAIApi } = require("./openai");
 JarvisIASpeech('je réfléchis à ta question')
