@@ -1,0 +1,148 @@
+process.on('uncaughtException', (err, origin) => {console.log(err,origin)});
+
+try{ StopVocal='off'
+console.log("node js version    "+    process.version);
+
+var os = require( 'os' ) ; console.log(os.totalmem(),os.cpus(),os.freemem())
+
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
+
+var requesta = require('request');
+var fs = require('fs');
+var https = require('https');var http = require('http');
+var express = require('express');
+var util = require('util');
+var cheerio = require('cheerio')
+var txt;
+var data={};
+sse="";
+var path = require('path');
+var pathPlug=('./plugins')
+var files = fs.readdirSync(pathPlug)
+levenshtein=require('levenshtein')
+//var os = require( 'os' );
+
+try{
+var interfaces = os.networkInterfaces();
+var addressesIPV4 = [];
+var addressesIPV6 = [];
+
+ Object.keys(interfaces).forEach((netInterface) => {
+  interfaces[netInterface].forEach((interfaceObject) => {
+   if (interfaceObject.family === 'IPv4' && !interfaceObject.internal) {
+    addressesIPV4.push(interfaceObject.address);
+   }
+   if (interfaceObject.family === 'IPv6' && !interfaceObject.internal) {
+    addressesIPV6.push(interfaceObject.address);
+   }
+
+  });
+ });
+ console.log( addressesIPV4[0]," addresse")
+console.log( addressesIPV6[0]," addresse")
+JarvisIAIpMaster = addressesIPV4[0];
+}
+catch(err){console.log('error ip detection, please contact creator whith error #001');setTimeout(function(){  }, 10000);}
+
+Askme=0
+JarvisIAResponse=''
+JarvisIANom="Mathilde"
+JarvisIANircmd = __dirname + '/bin/nircmd.exe ';// 16 ou 32 ?
+JarvisIA={};
+JarvisIASpeech="";
+JarvisIASound="";
+JarvisIAPlugins={};
+JarvisIAItem="";
+JarvisIANomPlugins=[]
+JarvisIAOldReception=[]
+var tempo1=path.resolve('%CD%',"./script/plugin.js").replace('\\%CD%', '')
+var temp = require(tempo1);
+temp.init()
+delete require.cache[require.resolve(tempo1)]
+
+var tempo3=path.resolve('%CD%',"./script/function.js").replace('\\%CD%', '')
+var temp = require(tempo3);
+temp.init()
+delete require.cache[require.resolve(tempo3)]
+
+var tempo=path.resolve('%CD%',"./script/start.js").replace('\\%CD%', '')
+var temp = require(tempo);
+temp.init()
+delete require.cache[require.resolve(tempo)]	
+
+var tempo=path.resolve('%CD%',"./script/plugin.js").replace('\\%CD%', '')
+var temp = require(tempo);
+temp.initialisation()
+delete require.cache[require.resolve(tempo)]
+
+console.log('')
+
+// port HTTPS -- à changer selon les ports disponibles
+var port_https = '4300'; console.log("Préparation du Serveur HTTP sur le port " + port_https);
+var app = express() ; app.use(express.static(__dirname  + '/static'));
+
+//app musique
+appmusique = express();
+appmusique.use(express.static('C:\\'));
+SSEMUSIQUE = require('sse-emitter');
+//file:///C:/JarvisIA/plugins/bruitages/animaux/chat.mp3
+ssemusique = new SSEMUSIQUE({
+  KeepAliveInterval: 15000, // in ms, defaults to 10000
+});
+appmusique.get('/scri', ssemusique.bind());
+
+http.createServer({}, appmusique).listen(8091);
+
+//appmusique.listen(8091);
+
+// on utilise Server-Sent Emitters pour dialoguer avec Chrome et la page d'acquisition audio
+var SSE = require('sse-emitter');
+sse = new SSE({  KeepAliveInterval: 15000,});
+app.get('/jarvispage', sse.bind());
+
+app.get('/jarvis', function(req, res){
+res.write('ok');res.end();
+
+//if(StopVocal=="off"){
+//StopVocal="on"
+var tempo2=path.resolve('%CD%',"./script/traitement.js").replace('\\%CD%', '')
+var temp = require(tempo2);
+	try{temp.init(req)}
+	catch(err){console.log(err)}
+delete require.cache[require.resolve(tempo2)]
+console.log('fin traitement')
+//}
+});//fin app get !!!!!!!
+
+https.createServer({
+	key: fs.readFileSync(__dirname + '/key.pem'),
+	cert: fs.readFileSync(__dirname + '/cert.pem')
+}, app).listen(port_https);
+
+autorun_browser(false);
+//setTimeout(function(){ 
+//	console.log("")
+//JarvisIASpeech("système activé et opérationnel, en attente d'instruction")
+ //}, 10000);
+function autorun_browser(kill) {
+	var exec = require('child_process').exec;
+	if (kill==true) { var proc = JarvisIANircmd + 'closeprocess chrome.exe'}
+	else {	//"C:\Chrome\18.0.1024.45\chrome.exe" --user-data-dir="..\User Data\18" --chrome-version=18.0.1025.45
+		var proc = 'start chrome.exe https://127.0.0.1:4300 '
+//var proc = 'start chrome.exe --app=https://127.0.0.1:4300 '
+//"C:\12\11\chrome.exe" --user-data-dir="..\User Data\58" --chrome-version=11
+//var proc = 'start chrome.exe --window-size=800,600 --app=https://127.0.0.1:4300 --new-window'
+//var proc = 'C:/12/11/chrome.exe --user-data-dir="../User Data/11" --chrome-version=11 "https://127.0.0.1:4300 " '
+//--kiosk http://example.com/
+	}
+//chrome.exe --app=https://duckduckgo.com --new-window
+	var child = exec(proc, function (error, stdout, stderr) {	
+		if (error !== null) console.log('exec error: ' + error);
+		if (kill==true) setTimeout(function() {autorun_browser(false);},2000);
+	});		
+
+}//fin autorun
+
+}catch(err){
+	console.log('');console.log(err)
+}

@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <meta charset="utf8">   
+    <title>JARVIS IA</title>
+    <link rel="shortcut icon" type="image/ico" href="/jarvis.ico"/>
+    <link rel="stylesheet" href="css/clock.css">
+  </head>
+  <body background="icones/Images/12.jpg">
+
+  <FONT color="dark">
+<body>
+
+<div class="wrapper">
+         <div class="display">
+            <div id="time"></div>
+            <script type="text/javascript" src="heure.js"></script>
+         </div>
+         
+      </div>                 
+<div class="wrapper1">
+         <div class="display1">
+            <div id="date"></div>
+
+         </div>
+         
+      </div>                         
+                         
+<div class="wrapper2">
+         <div class="display2">
+            <div id="iplocal"></div>
+         </div>
+         
+</div>
+                                              
+
+<div id="SCENARIO"></div>
+<div id="INFOMODIALE"></div>
+
+<div class="course">liste des courses : <span class="plugin_course"></span></div>
+<div class="notification">NOTIFICATION : <span class="plugin_notification"></span></div>
+
+<div class="Imgalerte">
+    <img id="Imgalerte" src="" width="100" height="100" align="right">
+</div>                    
+ 
+            <center><img id="myImgvisage" src="icones/Images/0.gif" height="200" width="200">   
+           
+            <button onclick="recognition.start()">Start</button>
+            <button onclick="recognition.stop()">Stop</button>
+
+<p></p>
+<textarea id="textarea" rows=1 cols=50 style="background:black;color:white" ></textarea>
+
+<input type="text" maxlength="512" id="searchTxt"  placeholder="Entrez une phrase" class="searchField" onkeypress="if (event.keyCode==13){ recobouton();return false;}"/>
+<input type="button" value="Envoyer texte" onclick="recobouton()">
+
+<p></p>
+
+<textarea id="textarearesponse" rows=5 cols=100 style="background:black;color:white" ></textarea>          
+
+        <audio controls style="height: 20px;" id="myRadio" controls autoplay>
+            <source src="" type="audio/mpeg">
+            Your browser does not support the audio element.     
+        </audio>
+        
+        <audio controls style="height: 20px;" id="myMusique" controls autoplay>             
+              <source src="" type="audio/mpeg">
+              Your browser does not support the audio element.            
+        </audio></center>
+
+
+<iframe id="deezer" src="http://widget.deezer.com/widget/dark/playlist/1479458365" width="700" height="190" frameborder="0" allowtransparency="true" allow="encrypted-media; clipboard-write"></iframe>
+
+<div id="alarme">
+
+<script src="volume-meter.js"></script>
+<script src="main.js"></script>
+<script src="ip.js"></script>
+<script src="voices.js"></script>
+<script src="os.js"></script>
+<script src="mainhtml.js"></script>
+<script src="events.js"></script>
+</div>
+
+
+<script>
+
+
+</script>
+
+  </body>
+</html>
