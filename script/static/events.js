@@ -90,10 +90,10 @@ if( obj.command=='courses'){
         var r2=setInterval(function(){
             if (speechSynthesis.speaking==true) {
             clearInterval(r);clearInterval(r2);console.log('arret sécurité 60 secondes');speechSynthesis.cancel()
-            document.getElementById("myImgvisage").src ="icones/Images/0.png"
-            coupureson=0 
+            document.getElementById("myImgvisage").src ="icones/Images/0.gif"
+            coupureson=0 ;recognition.start()
             }
-            else{speechSynthesis.cancel()}
+            else{speechSynthesis.cancel();recognition.start()}
         }, 60*1000);
 
 
