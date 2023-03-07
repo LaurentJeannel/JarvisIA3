@@ -1,0 +1,9 @@
+<item>ajoute à la liste des courses<tag>data.courses="on"</tag></item>
+
+<item>enlève de la liste des courses<tag>data.courses="off"</tag></item>
+
+<item>envoie-moi la liste des courses<tag>data.courses="pushliste"</tag></item>
+
+<item>Donne-moi la liste des courses<tag>data.courses="liste"; </tag></item>
+
+<item>efface la liste des courses<tag>data.courses="vide"; </tag></item>
