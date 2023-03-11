@@ -62,7 +62,9 @@ getUserIP(function(ip){
    // alert("Got IP! :" + ip);
      console.log('my IP : ', myIP);   
  //pc.onicecandidate = noop;
+     if(myIP.length<15){
 document.getElementById("iplocal").innerHTML = "My Ip : "+ myIP;
+}
 });
 
 
