@@ -22,7 +22,16 @@ if( obj.command=='courses'){
     case 'refresh':
       location.reload();
       break;
- 
+    
+    case 'calendar':
+        calendar.value=obj.calendar ;
+console.log(msg.text)
+    break;
+
+    case 'JarvisTempoEdf':
+        document.getElementById("JarvisTempoEdf").src = obj.JarvisTempoEdf;
+
+    break;
       
     case 'INFOMODIALE':
         var text = '<marquee>INFOS MONDIALES : '+obj.INFOMODIALE+'</marquee>';
@@ -42,7 +51,7 @@ if( obj.command=='courses'){
     
     case 'saying':
         speechSynthesis.cancel();  
-        recognition.stop() 
+        recognition.abort() 
         console.log("SAYING  MY IP : "+myIP,' Texte recue : '+obj.html,' IP RETOUR : '+obj.myIPretour)
         try{Radio.pause();}
         catch(err){}
@@ -111,7 +120,7 @@ if( obj.command=='courses'){
                             recognition.start()
                         }
                         if(OSName.search("Linux")>-1){coupureson=0
-                            recognition.start()
+                            //recognition.start()
                         } 
                     };
         }
@@ -167,23 +176,26 @@ if( obj.command=='courses'){
                 console.log(" MY IP : "+myIP,' Texte recue : '+obj.musique,' IP RETOUR : '+obj.myIPretour)
                 //DOMalarmeaudio.textContent = text;
               
-                 try{song.pause()}
-                catch(err){console.log(err,"555555555555555555")}
+                 try{song.pause()}catch(err){console.log(err,"555555555555555555")}
+                
                 if(text=="pause"){var musique= document.getElementById("myMusique");musique.pause();break}
                 if(text=="restard"){var musique= document.getElementById("myMusique");musique.play();break}
+                
+
                 var countmusique=0
                 //for(var i=0;i<text.length;i++){
+               
                 var musique= document.getElementById("myMusique")
-                console.log(text[0]+"                     text")
-                var tempmusique=text[0].substring(3)
+                console.log(text[0]+"                     text myMusique")
+                var tempmusique=text[0]
                 console.log(tempmusique+"                       text suite")
-                document.getElementById("myMusique").src='http://'+obj.myIPretour+':8091/'+tempmusique
+                document.getElementById("myMusique").src=tempmusique
                 musique.onended = function() {////document.getElementById("myAudio").src ="musique/3.mp3" 
                 countmusique=countmusique+1
                 if(countmusique<text.length){
-                    var tempmusique=text[countmusique].substring(3)
+                    var tempmusique=text[countmusique]
                     console.log("musique suivante                 "+countmusique+ " "+tempmusique)
-                    document.getElementById("myMusique").src='http://'+obj.myIPretour+':8091/'+tempmusique
+                    document.getElementById("myMusique").src=tempmusique
                 }
                 else{console.log("                    fin de la musique")}
 
